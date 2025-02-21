@@ -1,7 +1,15 @@
-#ifndef MAIN_H
-#define MAIN_H
+#include "main.h"
 
-int _putchar(char c);
-void print_alphabet(void);
+/**
+ * print_alphabet - Prints the alphabet in lowercase.
+ *
+ * Return: None
+ */
+void print_alphabet(void)
+{
+	char ch;
 
-#endif
+	for (ch = 'a'; ch <= 'z'; ch++)
+		_putchar(ch);
+	_putchar('\n');
+}
