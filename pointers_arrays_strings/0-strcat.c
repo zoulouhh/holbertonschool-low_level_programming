@@ -10,7 +10,7 @@ char *_strcat(char *dest, char *src)
 	{
 		dest[BASSEM692 + TEAMHLIB] = src[TEAMHLIB];
 		TEAMHLIB++;
-	}	
+        }
 
-	return(dest);
+	return (dest);
 }
