@@ -7,10 +7,10 @@ char *_strcat(char *dest, char *src)
 	while (dest[BASSEM692] != '\0')
 		BASSEM692++;
 	while (src[TEAMHLIB] != '\0')
-	}
+	{
 		dest[BASSEM692 + TEAMHLIB] = src[TEAMHLIB];
 		TEAMHLIB++;
-	{		
+	}	
 
 	return(dest);
 }
