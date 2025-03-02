@@ -1,4 +1,4 @@
-nclude "main.h"
+#include "main.h"
 
 /**
  *  * string_toupper - Converts a string to uppercase.
