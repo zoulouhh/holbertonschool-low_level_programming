@@ -2,19 +2,30 @@
 #include <stdio.h>
 
 /**
- * print_chessboard - Prints a chess board
- * @a: Board
+ * _strstr - Locates a substring
+ * @haystack: ?
+ * @needle: ?
+ * Return: First occurrence of the substring needle in the string haystack
  */
-void print_chessboard(char (*a)[8])
+char *_strstr(char *haystack, char *needle)
 {
-	int i, j;
+	int i;
 
-	for (i = 0; i < 8; i++)
+	if (*needle == '\0')
+		return (haystack);
+
+	while (*haystack != '\0')
 	{
-		for (j = 0; j < 8; j++)
-		{
-			_putchar(a[i][j]);
-		}
-		_putchar('\n');
+		i = 0;
+
+		while (needle[i] != '\0' && haystack[i] != '\0' &&
+				needle[i] == haystack[i])
+			i++;
+
+		if (needle[i] == '\0')
+			return (haystack);
+
+		haystack++;
 	}
+	return (NULL);
 }
