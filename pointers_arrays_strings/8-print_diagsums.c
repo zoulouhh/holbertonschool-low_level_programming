@@ -5,7 +5,7 @@
  *  * print_diagsums - Prints the sum of the two diagonals of a matrix
  *   * @a: Matrix
  *    * @size: Size of matrix
- *     */
+ *    */
 void print_diagsums(int *a, int size)
 {
 		int i = 0, sum = 0, sum2 = 0;
