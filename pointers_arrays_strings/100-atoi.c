@@ -1,5 +1,4 @@
 #include <limits.h>  // Include this header for INT_MAX and INT_MIN
-
 int _atoi(char *s)
 {
     int result = 0;
