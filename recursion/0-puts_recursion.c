@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "main.h"
 
-int _putchar(char c);  // Add this line
+int _putchar(char c); /* Function prototype for _putchar */
 
 /**
  * _puts_recursion - Prints a string recursively
