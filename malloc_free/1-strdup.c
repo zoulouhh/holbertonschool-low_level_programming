@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * _strdup - Duplicates a given string into a newly allocated memory space.
@@ -11,22 +10,24 @@
 char *_strdup(char *str)
 {
     char *duplicate;
-    size_t len;
+    unsigned int len, i;
 
-    // Check if the input string is NULL
+    /* Check if the input string is NULL */
     if (str == NULL)
         return (NULL);
 
-    // Calculate the length of the input string including null terminator
-    len = strlen(str) + 1;
+    /* Calculate the length of the input string */
+    for (len = 0; str[len]; len++)
+        ;
 
-    // Allocate memory for the duplicate string
-    duplicate = malloc(len);
+    /* Allocate memory for the duplicate string (including null terminator) */
+    duplicate = malloc(sizeof(char) * (len + 1));
     if (duplicate == NULL)
         return (NULL);
 
-    // Copy the original string into the newly allocated memory
-    memcpy(duplicate, str, len);
+    /* Copy the original string into the newly allocated memory */
+    for (i = 0; i <= len; i++)
+        duplicate[i] = str[i];
 
     return (duplicate);
 }
