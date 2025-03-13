@@ -1,6 +1,6 @@
 #include "main.h"
-#include <stdlib.h>  // For malloc
-#include <stddef.h>  // For size_t
+#include <stdlib.h> /* For malloc */
+#include <stddef.h> /* For size_t */
 
 /**
  * str_concat - Concatenates two strings.
