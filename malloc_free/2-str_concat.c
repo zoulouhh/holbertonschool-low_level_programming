@@ -1,44 +1,61 @@
-nclude "main.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
+#include <stdlib.h>  // For malloc
+#include <stddef.h>  // For size_t
 
 /**
- *  * str_concat - Concatenate two strings
- *   * @s1: String one
- *    * @s2: String two
- *     * Return: Ptr
- *      */
+ * str_concat - Concatenates two strings.
+ * @s1: First string.
+ * @s2: Second string.
+ *
+ * Return: Pointer to newly allocated memory containing concatenated string,
+ *         or NULL on failure.
+ */
 char *str_concat(char *s1, char *s2)
 {
-		int s_s1 = 0, s_s2 = 0, total_size = 0, i;
-			char *ptr;
+    char *concat;
+    int len1 = 0, len2 = 0, i, j;
 
-				if (s1 == NULL)
-							s1 = "";
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
 
-					if (s2 == NULL)
-								s2 = "";
+    /* Calculate lengths of s1 and s2 */
+    while (s1[len1])
+        len1++;
+    while (s2[len2])
+        len2++;
 
-						while (s1[s_s1] != '\0')
-									s_s1++;
+    /* Allocate memory for concatenated string */
+    concat = malloc(sizeof(char) * (len1 + len2 + 1));
+    if (concat == NULL)
+        return (NULL);
 
-							while (s2[s_s2] != '\0')
-										s_s2++;
+    /* Copy s1 into concat */
+    for (i = 0; i < len1; i++)
+        concat[i] = s1[i];
 
-								total_size = s_s1 + s_s2;
-									ptr = malloc(sizeof(char) * (total_size + 1));
-										if (ptr == NULL)
-													return (NULL);
+    /* Copy s2 into concat */
+    for (j = 0; j < len2; j++, i++)
+        concat[i] = s2[j];
 
-											for (i = 0; i < s_s1; i++)
-													{
-																ptr[i] = s1[i];
-																	}
+    /* Null-terminate the concatenated string */
+    concat[i] = '\0';
 
-												for (i = 0; i < s_s2; i++)
-														{
-																	ptr[s_s1 + i] = s2[i];
-																		}
-
-													return (ptr);
+    return (concat);
 }
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                                                                                                                                                                                                                                                        
+~                                               
