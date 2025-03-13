@@ -10,14 +10,14 @@
  */
 void *malloc_checked(unsigned int b)
 {
-    void *ptr;
+	void *ptr;
 
-    ptr = malloc(b); /* Allocate memory */
-    if (ptr == NULL) /* Check if malloc failed */
-    {
-        exit(98); /* Exit with status 98 if allocation fails */
-    }
+	ptr = malloc(b); /* Allocate memory */
+	if (ptr == NULL) /* Check if malloc failed */
+	{
+	exit(98); /* Exit with status 98 if allocation fails */
+	}
 
-    return ptr; /* Return the allocated memory pointer */
+	return (ptr); /* Return the allocated memory pointer */
 }
 
