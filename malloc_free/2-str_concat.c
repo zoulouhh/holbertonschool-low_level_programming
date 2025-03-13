@@ -1,40 +1,46 @@
+#include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * str_concat - Concatenates two strings.
- * @s1: First string.
- * @s2: Second string.
- *
- * Return: Pointer to newly allocated space in memory containing s1 followed
- * by s2, and null terminated. Returns NULL on failure.
+ * str_concat - Concatenate two strings
+ * @s1: String one
+ * @s2: String two
+ * Return: Ptr
  */
 char *str_concat(char *s1, char *s2)
 {
-    char *concat;
-    int i, j, len1 = 0, len2 = 0;
+	int s_s1 = 0, s_s2 = 0, total_size = 0, i;
+	char *ptr;
 
-    if (s1 != NULL)
-    {
-        while (s1[len1])
-            len1++;
-    }
-    if (s2 != NULL)
-    {
-        while (s2[len2])
-            len2++;
-    }
+	if (s1 == NULL)
+		s1 = "";
 
-    concat = malloc(sizeof(char) * (len1 + len2 + 1));
-    if (concat == NULL)
-        return (NULL);
+	if (s2 == NULL)
+		s2 = "";
 
-    for (i = 0; i < len1; i++)
-        concat[i] = s1[i];
-    for (j = 0; j < len2; j++)
-        concat[i + j] = s2[j];
-    concat[i + j] = '\0';
+	while (s1[s_s1] != '\0')
+		s_s1++;
 
-    return (concat);
+	while (s2[s_s2] != '\0')
+		s_s2++;
+
+	total_size = s_s1 + s_s2;
+	ptr = malloc(sizeof(char) * (total_size + 1));
+	if (ptr == NULL)
+		return (NULL);
+
+	for (i = 0; i < s_s1; i++)
+	{
+		ptr[i] = s1[i];
+	}
+
+	for (i = 0; i < s_s2; i++)
+	{
+		ptr[s_s1 + i] = s2[i];
+	}
+
+	return (ptr);
 }                                                                                                                                                                                                                                                                        
 ~                                                                                                                                                                                                                                                                        
 ~                                                                                                                                                                                                                                                                        
