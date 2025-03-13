@@ -1,58 +1,29 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-/**
- * str_concat - Concatenate two strings
- * @s1: String one
- * @s2: String two
- * Return: Ptr
- */
 char *str_concat(char *s1, char *s2)
 {
-	int s_s1 = 0, s_s2 = 0, total_size = 0, i;
-	char *ptr;
+    char *concat;
+    int len1, len2;
 
-	if (s1 == NULL)
-		s1 = "";
+    // Treat NULL as empty string
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
 
-	if (s2 == NULL)
-		s2 = "";
+    // Get lengths of strings
+    len1 = strlen(s1);
+    len2 = strlen(s2);
 
-	while (s1[s_s1] != '\0')
-		s_s1++;
+    // Allocate memory for concatenated string
+    concat = malloc(sizeof(char) * (len1 + len2 + 1));
+    if (concat == NULL)
+        return NULL;
 
-	while (s2[s_s2] != '\0')
-		s_s2++;
+    // Copy s1 and s2 into new string
+    strcpy(concat, s1);
+    strcat(concat, s2);
 
-	total_size = s_s1 + s_s2;
-	ptr = malloc(sizeof(char) * (total_size + 1));
-	if (ptr == NULL)
-		return (NULL);
-
-	for (i = 0; i < s_s1; i++)
-	{
-		ptr[i] = s1[i];
-	}
-
-	for (i = 0; i < s_s2; i++)
-	{
-		ptr[s_s1 + i] = s2[i];
-	}
-
-	return (ptr);
-}                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                                                                                                                                                                                                                                                        
-~                                               
+    return concat;
+}                                               
