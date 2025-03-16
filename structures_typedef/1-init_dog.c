@@ -1,21 +1,20 @@
-#ifndef DOG_H
-#define DOG_H
+#include <stdio.h>
+#include <stdlib.h>
+#include "dog.h"
 
 /**
- * struct dog - Structure représentant un chien
- * @name: Nom du chien
- * @age: Âge du chien
- * @owner: Nom du propriétaire
+ * init_dog - Initialize dog
+ * @d: Pointer to struct dog
+ * @name: Dog's Name
+ * @age: Dog's aGE
+ * @owner: Dog's owner
  */
-typedef struct dog
+void init_dog(struct dog *d, char *name, float age, char *owner)
 {
-    char *name;
-    float age;
-    char *owner;
-} dog_t;
+	if (d == NULL)
+		return;
 
-/* Déclaration de la fonction init_dog */
-void init_dog(dog_t *d, char *name, float age, char *owner);
-
-#endif /* DOG_H */
-
+	d->name = name;
+	d->age = age;
+	d->owner = owner;
+}
