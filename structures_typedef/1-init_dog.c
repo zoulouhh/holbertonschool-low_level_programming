@@ -2,22 +2,16 @@
 #include "dog.h"
 
 /**
- * main - Programme principal
- * 
- * Retourne 0 si tout fonctionne correctement.
+ * main - check the code
+ *
+ * Return: Always 0.
  */
 int main(void)
 {
-    dog_t my_dog;
+    struct dog my_dog;
 
-    /* Initialisation du chien */
     init_dog(&my_dog, "Ghost", 4.75, "Jon Snow");
-
-    /* Affichage des informations du chien */
-    printf("Nom du chien: %s\n", my_dog.name);
-    printf("Âge du chien: %.2f\n", my_dog.age);
-    printf("Propriétaire: %s\n", my_dog.owner);
-
+    printf("My name is %s, and I am %.2f :) - Woof!\n", my_dog.name, my_dog.age);
     return (0);
 }
 
