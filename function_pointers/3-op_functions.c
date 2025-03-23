@@ -1,4 +1,5 @@
 #include "3-calc.h"
+#include <stdio.h>
 
 /**
  * op_add - Returns the sum of two numbers.
@@ -55,8 +56,3 @@ int op_div(int a, int b)
  *
  * Return: Remainder of a divided by b.
  */
-int op_mod(int a, int b)
-{
-    return (a % b);
-}
-
