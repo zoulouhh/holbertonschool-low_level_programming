@@ -1,24 +1,42 @@
-#ifndef CALC_H
-#define CALC_H
+#include "3-calc.h"
+#include <string.h>
 
 /**
- * struct op - Struct op
- *
- * @op: The operator
- * @f: The function associated
+ * main - performs simple operations
+ * @argc: number of arguments
+ * @argv: array of arguments
+ * Return: 0 on success, 98, 99, or 100 on error
  */
-typedef struct op
+int main(int argc, char *argv[])
 {
-    char *op;
-    int (*f)(int a, int b);
-} op_t;
+    int num1, num2, result;
+    int (*operation)(int, int);
 
-int op_add(int a, int b);
-int op_sub(int a, int b);
-int op_mul(int a, int b);
-int op_div(int a, int b);
-int op_mod(int a, int b);
-int (*get_op_func(char *s))(int, int);
+    if (argc != 4)
+    {
+        printf("Error\n");
+        exit(98);
+    }
 
-#endif /* CALC_H */
+    num1 = atoi(argv[1]);
+    num2 = atoi(argv[3]);
+    operation = get_op_func(argv[2]);
+
+    if (operation == NULL || strlen(argv[2]) != 1)
+    {
+        printf("Error\n");
+        exit(99);
+    }
+
+    if ((argv[2][0] == '/' || argv[2][0] == '%') && num2 == 0)
+    {
+        printf("Error\n");
+        exit(100);
+    }
+
+    result = operation(num1, num2);
+    printf("%d\n", result);
+
+    return (0);
+}
 
