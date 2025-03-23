@@ -1,3 +1,6 @@
+#include <stdio.h>  /* Pour printf */
+#include <stdlib.h> /* Pour exit */
+
 /**
  * op_div - divise deux nombres entiers
  * @a: premier nombre
