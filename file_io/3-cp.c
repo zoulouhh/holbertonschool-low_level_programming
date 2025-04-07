@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
     if (fd_from == -1)
         print_error(98, "Error: Can't read from file", argv[1]);
 
-    /* Open destination file */
-    fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    /* Open destination file with correct permissions */
+    fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     if (fd_to == -1)
         print_error(99, "Error: Can't write to", argv[2]);
 
