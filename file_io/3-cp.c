@@ -1,91 +1,66 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
 
-	#define BUFFER_SIZE 1024
-
-/**
- * close_file_no_free - Closes a file descriptor without freeing the buffer
- * @file_descriptor: The file descriptor to close
- * @returnal: The return value to return
- *
- * Return: The return value passed in
- */
-
-	int close_file_no_free(int file_descriptor, int returnal)
-	{
-	if (close(file_descriptor) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_descriptor);
-		exit(100);
-	}
-	return (returnal);
-	}
+#define BUFFER_SIZE 1024
 
 /**
- * main_copy - Copies the content of a file to another file.
- * @argc: The number of command line arguments.
- * @argv: The command line arguments.
- *
- * Description: this function is explain 2 line up.
- *
- * Return: 0 on success.
+ * print_error - Prints an error message and exits with a specific code.
+ * @code: The exit code.
+ * @message: The error message to print.
+ * @filename: The filename related to the error.
  */
-
-	int main_copy(int argc, char *argv[])
-	{
-	int fd_from, fd_to;
-	ssize_t nread;
-	char buffer[BUFFER_SIZE];
-
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
-	}
-	fd_from = open(argv[1], O_RDONLY);
-	if (fd_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		close_file_no_free(fd_from, 99);
-		exit(99);
-	}
-	while ((nread = read(fd_from, buffer, BUFFER_SIZE)) > 0)
-	{
-		if (write(fd_to, buffer, nread) != nread)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			close_file_no_free(fd_from, 99);
-			close_file_no_free(fd_to, 99);
-			exit(99);
-		}
-	}
-	if (nread == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		close_file_no_free(fd_from, 98);
-		close_file_no_free(fd_to, 98);
-		exit(98);
-	}
-	close_file_no_free(fd_from, 0);
-	close_file_no_free(fd_to, 0);
-	return (0);
-	}
+void print_error(int code, const char *message, const char *filename)
+{
+    dprintf(STDERR_FILENO, "%s %s\n", message, filename);
+    exit(code);
+}
 
 /**
- * main - Entry point of the program.
- *@argc: The number of command-line arguments
- *@argv: An array of command-line argument strings
- * Description: Entry point of a programme,1st fonction execute when you start.
+ * main - Copies the content of a file to another file.
+ * @argc: The number of arguments passed to the program.
+ * @argv: The arguments passed to the program.
  *
- * Return: Always returns 0 on success.
- *
+ * Return: 0 on success, exits with specific codes on failure.
  */
-	int main(int argc, char *argv[])
-	{
-	return (main_copy(argc, argv));
-	}
+int main(int argc, char *argv[])
+{
+    int fd_from, fd_to, read_bytes, write_bytes;
+    char buffer[BUFFER_SIZE];
+
+    if (argc != 3)
+        print_error(97, "Usage: cp file_from file_to", "");
+
+    /* Open source file */
+    fd_from = open(argv[1], O_RDONLY);
+    if (fd_from == -1)
+        print_error(98, "Error: Can't read from file", argv[1]);
+
+    /* Open destination file */
+    fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    if (fd_to == -1)
+        print_error(99, "Error: Can't write to", argv[2]);
+
+    /* Read from source and write to destination */
+    while ((read_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+    {
+        write_bytes = write(fd_to, buffer, read_bytes);
+        if (write_bytes != read_bytes)
+            print_error(99, "Error: Can't write to", argv[2]);
+    }
+
+    if (read_bytes == -1) /* Handle read error */
+        print_error(98, "Error: Can't read from file", argv[1]);
+
+    /* Close file descriptors */
+    if (close(fd_from) == -1)
+        print_error(100, "Error: Can't close fd", argv[1]);
+
+    if (close(fd_to) == -1)
+        print_error(100, "Error: Can't close fd", argv[2]);
+
+    return (0);
+}
+
